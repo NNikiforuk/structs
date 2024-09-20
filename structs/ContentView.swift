@@ -7,32 +7,28 @@
 
 import SwiftUI
 
-struct Watermark: ViewModifier {
-    var text: String
-    
+//Create a custom ViewModifier (and accompanying View extension) that makes a view have a large, blue font suitable for prominent titles in a view.
+
+struct Title: ViewModifier {
     func body(content: Content) -> some View {
-        ZStack(alignment: .bottomTrailing){
-            content
-            Text(text)
-                .font(.caption)
-                .foregroundStyle(.white)
-                .padding(5)
-                .background(.black)
-        }
+        content
+            .font(.largeTitle)
+            .foregroundStyle(.blue)
     }
 }
 
-extension View{
-    func watermarked(with text: String) -> some View {
-        modifier(Watermark(text: text))
+extension View {
+    func titleStyle() -> some View {
+        modifier(Title())
     }
 }
+
+
 
 struct ContentView: View {
     var body: some View {
-        Color.blue
-            .frame(width: 300, height: 200)
-            .watermarked(with: "Hacking with Swift")
+        Text("Hi Niki")
+            .titleStyle()
     }
 }
 
